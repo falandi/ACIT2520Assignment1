@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Pie chart of Sales by </title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+
+<body>
+    <div id="chart_div"></div>
+    <script type="text/javascript">
+        google.charts.load('current', {
+            packages: ['corechart', 'bar']
+        });
+        google.charts.setOnLoadCallback(LoadData);
+        function LoadData() {
+            $.ajax({
+                url: '/',
+                dataType: "json",
+                type: "GET",
+                error: function (xhr, status, error) {
+                    toastr.error(xhr.responseText);
+                },
+                success: function (data) {
+                    PopulationChart(data);
+                    return false;
+                }
+            });
+            return false;
+        }
+        function PopulationChart(data) {
+            var dataArray = [
+                ['ev', 'count']
+            ];
+            $.each(data, function (i, item) {
+                dataArray.push([item.Sales, item.count]);
+            });
+            var data = google.visualization.arrayToDataTable(dataArray);
+            var options = {
+                title: 'Students by School',
+                width: 700,
+                height: 800
+            };
+            var divElement = document.getElementById('chart_div');
+            var chart = new google.visualization.PieChart(divElement);
+            chart.draw(data, options);
+            return false;
+        }  
+    </script>
+</body>
+
+</html>
