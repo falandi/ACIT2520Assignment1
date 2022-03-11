@@ -16,7 +16,7 @@
         google.charts.setOnLoadCallback(LoadData);
         function LoadData() {
             $.ajax({
-                url: 'http://localhost:3000/api/ev',
+                url: 'http://localhost:8888/api/ev',
                 dataType: "json",
                 type: "GET",
                 error: function (xhr, status, error) {

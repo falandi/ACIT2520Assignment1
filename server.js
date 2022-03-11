@@ -12,15 +12,15 @@ const swaggerUi = require('swagger-ui-express');
 swaggerDefinition = {
     openapi: '3.0.0',
     info: {
-        title: 'Students API',
-        description: 'Student API information',
+        title: 'Ev API',
+        description: 'Ev API information',
         contact: {
-            name: "Developer Jane Bond"
+            name: "Faith Alandi, Ajay Sahota, Tom Nguyen"
         },
         version: '1.0.0',
         servers: [
             {
-                url: "http://localhost:3000",
+                url: "http://localhost:8888",
                 description: "Development Server"
             }
         ]
