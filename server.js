@@ -4,10 +4,12 @@ const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const index = require("./routes");
 const ev = require("./routes/ev");
-
+const csvtojson = require('csvtojson')
 const config = require('./config');
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
+const SaleModel = require('./models/sale')
+// const MyModel = mongoose.model('SaleSchema', SaleModel.saleSchema);
 
 swaggerDefinition = {
     openapi: '3.0.0',
@@ -44,8 +46,22 @@ function (err) {
    console.log(`Successfully connected to database server ${config.database_server}:${config.database_port} `);
 });
 
+//if conditional here 
+SaleModel.countDocuments({}, function (err, count) {
+    if(count == 0){
+        const filename = path.join(__dirname, "./data/ev_sales_2020.csv")
+        csvtojson().fromFile(filename)
+            .then(data => {
+                SaleModel.insertMany(data)
+    })
+
+    }
+});
+
+
 // View engine
 var ejsEngine = require("ejs-locals");
+const { db } = require("./models/sale");
 app.engine("ejs", ejsEngine);           // support master pages
 app.set("view engine", "ejs");          // ejs view engine
 // Set static folder

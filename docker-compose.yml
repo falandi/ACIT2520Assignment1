@@ -12,7 +12,6 @@ services:
       DB_SERVER: mongo
       DB_PORT: 27017
       PORT: 3000
-
   mongo:
     container_name: mongo
     image: mongo:4.1.6

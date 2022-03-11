@@ -19,7 +19,7 @@ const SaleModel = require('../models/sale')
  *              schema:
  *                type: array
  *                items:
- *                  $ref: '#/components/schemas/Sale'
+ *                  $ref: '#/components/schemas/sale'
 */
 router.get('/ev', (req, res) => {
     SaleModel.find({}, (err, data) => {
