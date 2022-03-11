@@ -2,18 +2,18 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const evSchema = new Schema({
+const saleSchema = new Schema({
     Country: {
         type: String,
         required: true
     },
     Sales: {
-        type: String,
+        type: Number,
         required: true
     },
     Year: {
-        type: String,
+        type: Number,
         required: true
     },
 });
-module.exports = mongoose.model("ev", evSchema);
+module.exports = mongoose.model("Sale", saleSchema);

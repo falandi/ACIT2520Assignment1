@@ -1,28 +1,53 @@
 const express = require("express");
 const router = express.Router();
-const MongooseEvModel = require('../models/ev')
+const SaleModel = require('../models/sale')
 
-router.get("/", (req, res, next) => {
-    MongooseEvModel.aggregate([{"$group" : {_id:"$Sales", count:{$sum:1}}}]).toArray(function(err, data) {
-        if (err) res.send(err);
-        res.json(data);
-        db.close();
-      });
-    });
+// router.get("/chart", (req, res, next) => {
+//     sql = "SELECT School as school, COUNT(*) as count";
+//     sql += " FROM students GROUP BY School";
 
+//     var params = []
+//     db.all(sql, params, (err, rows) => {
+//         if (err) {
+//           res.status(400).json({"error":err.message});
+//           return;
+//         }
+//         res.json(rows)
+//       });
+// });
+
+/**
+ * @swagger
+ * /api/ev:
+ *  get:
+ *      summary: Retrieve a list of sales
+ *      tags: [Sales]
+ *      description: Used to request all sales
+ *      produces:
+ *        - application/json
+ *      responses:
+ *        200:
+ *          description: A successful response
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: array
+ *                items:
+ *                  $ref: '#/components/schemas/Sale'
+*/
 router.get('/ev', (req, res) => {
-    MongooseEvModel.find({}, (err, data) => {
+    SaleModel.find({}, (err, data) => {
         if (err) res.send(err);
         res.json(data);
     });
 });
 // get single ev
 router.get("/ev/:id", function(req, res, next) {
-    MongooseEvModel.findById(req.params.id, (err, data) => {
+    SaleModel.findById(req.params.id, (err, data) => {
         if (err) res.send(err);
         res.json(data);
     });
-});
+}); 
 // create ev
 router.post("/ev", function(req, res, next) {
     var ev= req.body;
@@ -33,7 +58,7 @@ router.post("/ev", function(req, res, next) {
             {"error": "Bad data, could not be inserted into the database."}
         )
     } else {
-        let newev= new MongooseEvModel(ev);
+        let newev= new SaleModel(ev);
         newev.save((err, data) => {
             if (err) res.send(err);
             res.json(data);
@@ -42,7 +67,7 @@ router.post("/ev", function(req, res, next) {
 });
 // delete ev
 router.delete("/ev/:id", function(req, res, next) {
-    MongooseEvModel.findOneAndRemove({ _id: req.params.id }, (err, data) => {
+    SaleModel.findOneAndRemove({ _id: req.params.id }, (err, data) => {
         if (err) res.send(err);
         res.json({ message: 'Successfully deleted ev!'});
     });
@@ -67,7 +92,7 @@ router.put("/ev/:id", function(req, res, next) {
         res.status(400);
         res.json({"error": "Bad Data"})        
     } else {
-        MongooseEvModel.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true }, 
+        SaleModel.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true }, 
             (err, data) => {
                 if (err) res.send(err);
                 res.json(data);

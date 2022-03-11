@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Pie chart of Sales by </title>
+    <title>Pie chart of sales by country</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
@@ -16,11 +16,11 @@
         google.charts.setOnLoadCallback(LoadData);
         function LoadData() {
             $.ajax({
-                url: '/',
+                url: 'http://localhost:3000/api/ev',
                 dataType: "json",
                 type: "GET",
                 error: function (xhr, status, error) {
-                    toastr.error(xhr.responseText);
+                    console.log(xhr.responseText);
                 },
                 success: function (data) {
                     PopulationChart(data);
@@ -31,22 +31,22 @@
         }
         function PopulationChart(data) {
             var dataArray = [
-                ['ev', 'count']
+                ['Country', 'Sales']
             ];
             $.each(data, function (i, item) {
-                dataArray.push([item.Sales, item.count]);
+                dataArray.push([item.Country, item.Sales]);
             });
-            var data = google.visualization.arrayToDataTable(dataArray);
+            var dataTable = google.visualization.arrayToDataTable(dataArray);
             var options = {
-                title: 'Students by School',
+                title: 'Sales by Country',
                 width: 700,
                 height: 800
             };
             var divElement = document.getElementById('chart_div');
             var chart = new google.visualization.PieChart(divElement);
-            chart.draw(data, options);
+            chart.draw(dataTable, options);
             return false;
-        }  
+        }
     </script>
 </body>
 

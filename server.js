@@ -6,6 +6,33 @@ const index = require("./routes");
 const ev = require("./routes/ev");
 
 const config = require('./config');
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
+
+swaggerDefinition = {
+    openapi: '3.0.0',
+    info: {
+        title: 'Students API',
+        description: 'Student API information',
+        contact: {
+            name: "Developer Jane Bond"
+        },
+        version: '1.0.0',
+        servers: [
+            {
+                url: "http://localhost:3000",
+                description: "Development Server"
+            }
+        ]
+    }
+}
+
+const swaggerOptions = {
+    swaggerDefinition,
+    apis: ['routes/*.js']
+}
+
+const swaggerSpec = swaggerJsDoc(swaggerOptions);
 
 const app = express();
 
@@ -26,6 +53,13 @@ app.use(express.static(path.join(__dirname, "clients")));
 // Body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(function(req, res, next) {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+}); 
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use("/", index);
 app.use("/api", ev);
 app.listen(config.http_port, function() {
