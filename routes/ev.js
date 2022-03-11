@@ -1,7 +1,38 @@
 const express = require("express");
 const router = express.Router();
 const SaleModel = require('../models/sale')
-
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     sale:
+ *       type: object
+ *       required:
+ *         - Country
+ *         - Sales
+ *         - Year
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: The Auto-generated GUID of a sale
+ *         Country:
+ *           type:string
+ *           description: Country  of the sale
+ *         Sale:
+ *           type: number
+ *           description: Number of sales
+ *         Year:
+ *           type: string
+ *           descripton: Year that sales belongs to
+ *        
+ *       example:
+ *         _id: 621d30ca0125b6c87d56c32d
+ *         Country: Cambodia
+ *         Sale: 10000
+ *         Year: 2020
+ *     
+ *
+ */
 /**
  * @swagger
  * /api/ev:
@@ -20,6 +51,7 @@ const SaleModel = require('../models/sale')
  *                type: array
  *                items:
  *                  $ref: '#/components/schemas/sale'
+ *              
 */
 router.get('/ev', (req, res) => {
     SaleModel.find({}, (err, data) => {
@@ -33,7 +65,7 @@ router.get('/ev', (req, res) => {
  * /api/ev/{id}:
  *   get:
  *     summary: Retrieve a list of sales
- *     tags: [Sales]
+ *     tags: [sales]
  *     description: Returns a single sale
  *     produces:
  *       - application/json
