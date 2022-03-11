@@ -10,7 +10,7 @@ RUN npm install
 # RUN npm install --only=production
 # Bundle app source
 COPY . .
-EXPOSE 8888
+EXPOSE 3000
 CMD [ "npm", "start" ]
 # docker build -t snoopy/nodedocker:1.0.0 .
 # docker run -d -p 5000:3000 -d snoopy/nodedocker:1.0.0

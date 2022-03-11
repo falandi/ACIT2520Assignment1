@@ -16,7 +16,7 @@ const SaleModel = require('../models/sale')
  *           type: string
  *           description: The Auto-generated GUID of a sale
  *         Country:
- *           type:string
+ *           type: string
  *           description: Country  of the sale
  *         Sale:
  *           type: number
@@ -38,7 +38,7 @@ const SaleModel = require('../models/sale')
  * /api/ev:
  *  get:
  *      summary: Retrieve a list of sales
- *      tags: [Sales]
+ *      tags: [sales]
  *      description: Used to request all sales
  *      produces:
  *        - application/json
