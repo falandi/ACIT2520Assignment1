@@ -136,7 +136,7 @@ router.post("/ev", function(req, res, next) {
 });
 /**
  * @swagger
- * /api/sales/{id}:
+ * /api/ev/{id}:
  *   delete:
  *     summary: Deletes a single sale
  *     tags: [sales]
@@ -164,7 +164,7 @@ router.delete("/ev/:id", function(req, res, next) {
 
 /**
  * @swagger
- * /api/sales/{id}:
+ * /api/ev/{id}:
  *   put:
  *     summary: updates sales by id
  *     tags: [sales]

@@ -13,6 +13,6 @@ const saleSchema = new Schema({
     Year: {
         type: Number,
         required: true
-    },
+    }
 });
 module.exports = mongoose.model("Sale", saleSchema);
