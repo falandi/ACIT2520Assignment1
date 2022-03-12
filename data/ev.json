@@ -1,0 +1,57 @@
+[
+ {
+   "Country": "China",
+   "Sales": 1246000,
+   "Year": " 2020"
+ },
+ {
+   "Country": "USA",
+   "Sales": 297939,
+   "Year": " 2020"
+ },
+ {
+   "Country": "Germany",
+   "Sales": 394632,
+   "Year": " 2020"
+ },
+ {
+   "Country": "France",
+   "Sales": 194881,
+   "Year": " 2020"
+ },
+ {
+   "Country": "UK",
+   "Sales": 175082,
+   "Year": " 2020ve"
+ },
+ {
+   "Country": "Norway",
+   "Sales": 113588,
+   "Year": " 2020"
+ },
+ {
+   "Country": "Netherlands",
+   "Sales": 89362,
+   "Year": " 2020"
+ },
+ {
+   "Country": "Sweden",
+   "Sales": 96054,
+   "Year": " 2020"
+ },
+ {
+   "Country": "Japan",
+   "Sales": 29000,
+   "Year": " 2020"
+ },
+ {
+   "Country": "Canada",
+   "Sales": 47000,
+   "Year": " 2020"
+ },
+ {
+   "Country": "Other",
+   "Sales": 556462,
+   "Year": " 2020"
+ }
+]
